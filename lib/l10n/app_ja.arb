@@ -1,0 +1,13 @@
+{
+  "profile_edit": "プロフィール編集",
+  "nickname_edit": "ニックネーム編集",
+  "nickname_edit_hint": "新しいニックネームを入力",
+  "profile_photo": "プロフィール写真",
+  "secret_photo": "秘密写真",
+  "upload_success": "アップロードしました",
+  "upload_fail": "アップロード失敗",
+  "nickname_changed": "ニックネームが変更されました",
+  "nickname_change_fail": "ニックネーム変更失敗",
+  "cancel": "キャンセル",
+  "save": "保存"
+}

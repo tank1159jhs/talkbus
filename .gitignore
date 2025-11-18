@@ -1,0 +1,80 @@
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+/backend/node_modules/
+
+# Testing
+/coverage
+*.lcov
+
+# Production
+/dist
+/build
+/backend/dist
+/backend/build
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.iml
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Prisma
+prisma/client
+.prisma/
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Flutter
+.dart_tool/
+.flutter-plugins-dependencies
+build/
+.packages
+.pub-cache/
+pubspec.lock
+
+# Mobile
+/ios/Pods/
+/ios/Podfile.lock
+/ios/Flutter/Flutter.podspec
+/android/.gradle/
+/android/local.properties
+/android/.gradle/
+
+# Generated
+*.pbxproj
+*.xcworkspace/
+.metadata
+devtools_options.yaml
+
+# Temporary
+*.tmp
+*.bak
+*.swp

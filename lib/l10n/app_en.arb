@@ -1,0 +1,13 @@
+{
+  "profile_edit": "Profile Edit",
+  "nickname_edit": "Edit Nickname",
+  "nickname_edit_hint": "Enter new nickname",
+  "profile_photo": "Profile Photo",
+  "secret_photo": "Secret Photo",
+  "upload_success": "Upload successful",
+  "upload_fail": "Upload failed",
+  "nickname_changed": "Nickname changed",
+  "nickname_change_fail": "Nickname change failed",
+  "cancel": "Cancel",
+  "save": "Save"
+}

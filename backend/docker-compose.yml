@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: talkbus
+    ports:
+      - "5434:5432"
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@talkbus.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8080:80"  # ← 브라우저에서 http://localhost:8080 접속
+    depends_on:
+      - db
+
+volumes:
+  dbdata:

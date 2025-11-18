@@ -1,0 +1,19 @@
+{
+  "error": {
+    "no_token": "トークンがありません。",
+    "invalid_token": "トークンが無効です。",
+    "not_a_member": "このグループのメンバーではありません。",
+    "not_a_participant": "このトークの参加者ではありません。",
+    "room_not_found": "ルームが見つかりません。",
+    "unknown": "不明なエラーが発生しました。"
+  },
+  "success": {
+    "joined_room": "ルームに参加しました。",
+    "left_room": "ルームから退出しました。",
+    "message_sent": "メッセージを送信しました。"
+  },
+  "user": {
+    "connected": "ユーザーが接続しました。",
+    "disconnected": "ユーザーが切断しました。"
+  }
+}

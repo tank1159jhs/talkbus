@@ -1,0 +1,117 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model SMSCode {
+  id        String   @id @default(uuid())
+  phone     String
+  code      String
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+  verified  Boolean  @default(false)
+
+  userId String?
+  user   User?   @relation("UserSMSCodes", fields: [userId], references: [id])
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String?  @unique
+  passwordHash String?
+  nickname     String?
+  isGuest      Boolean  @default(false)   // ✅ 게스트 여부
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  gender       String?
+  birthDate    DateTime?
+  topic        String?
+
+  sentDirectMessages DirectMessage[] @relation("SentDirectMessages")
+  directRoomsAsUserA DirectRoom[] @relation("DirectRoomUserA")
+  directRoomsAsUserB DirectRoom[] @relation("DirectRoomUserB")
+
+  memberships Membership[]
+  groupMessages GroupMessage[]
+  smsCodes    SMSCode[] @relation("UserSMSCodes")
+  talkPosts   TalkPost[] // 작성한 토크 게시글 목록
+}
+
+model DirectRoom {
+  id        String   @id @default(uuid())
+  userAId   String
+  userBId   String
+  createdAt DateTime @default(now())
+
+  userA User   @relation("DirectRoomUserA", fields: [userAId], references: [id])
+  userB User   @relation("DirectRoomUserB", fields: [userBId], references: [id])
+  messages DirectMessage[]
+
+  @@index([userAId, userBId])
+}
+
+model DirectMessage {
+  id        String   @id @default(uuid())
+  directRoomId String
+  senderId  String
+  body      String
+  createdAt DateTime @default(now())
+
+  directRoom DirectRoom @relation(fields: [directRoomId], references: [id])
+  sender User @relation("SentDirectMessages", fields: [senderId], references: [id])
+}
+
+model GroupRoom {
+  id        String   @id @default(uuid())
+  title     String
+  createdAt DateTime @default(now())
+
+  memberships Membership[]
+  messages    GroupMessage[]
+}
+
+model Membership {
+  id       String    @id @default(uuid())
+  userId   String
+  groupRoomId  String
+  role     GroupRole @default(MEMBER)
+  joinedAt DateTime  @default(now())
+
+  user  User  @relation(fields: [userId], references: [id])
+  groupRoom GroupRoom @relation(fields: [groupRoomId], references: [id])
+
+  @@unique([userId, groupRoomId])
+}
+
+model GroupMessage {
+  id        String   @id @default(uuid())
+  groupRoomId   String
+  authorId  String
+  body      String
+  createdAt DateTime @default(now())
+
+  groupRoom  GroupRoom @relation(fields: [groupRoomId], references: [id])
+  author User  @relation(fields: [authorId], references: [id])
+
+  @@index([groupRoomId, createdAt])
+}
+
+model TalkPost {
+  id        String   @id @default(uuid())
+  title     String
+  content   String
+  authorId  String
+  createdAt DateTime @default(now())
+
+  author    User     @relation(fields: [authorId], references: [id])
+}
+
+enum GroupRole {
+  OWNER
+  MEMBER
+}
